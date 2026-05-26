@@ -21,8 +21,7 @@ function AdvisoryForm() {
 
     try {
       setLoading(true);
-      const res = await API.post("/advisory", {
-        ...form,
+      const res = await API.post("/api/advisory", {
         landArea: Number(form.landArea),
         budget: Number(form.budget),
       });
