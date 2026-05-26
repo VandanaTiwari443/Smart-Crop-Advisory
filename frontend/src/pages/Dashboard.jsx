@@ -9,7 +9,7 @@ function Dashboard() {
 
   useEffect(() => {
     const fetchStats = async () => {
-      const res = await API.get("/advisory/dashboard");
+      const res = await API.get("/api/advisory/dashboard");
       setStats(res.data);
     };
 
@@ -27,7 +27,10 @@ function Dashboard() {
             <p className="text-gray-600 mt-2">Welcome back, {user?.name}!</p>
           </div>
 
-          <Link to="/advisory" className="bg-green-700 text-white px-6 py-3 rounded-xl font-bold">
+          <Link
+            to="/advisory"
+            className="bg-green-700 text-white px-6 py-3 rounded-xl font-bold"
+          >
             Get New Advisory
           </Link>
         </div>
@@ -35,13 +38,19 @@ function Dashboard() {
         <div className="grid md:grid-cols-4 gap-6">
           <div className="bg-white p-6 rounded-2xl shadow">
             <p className="text-gray-500">Total Advisories</p>
-            <h2 className="text-4xl font-bold text-green-800 mt-3">{stats.totalAdvisories}</h2>
-            <p className="text-sm text-gray-500 mt-2">All time recommendations</p>
+            <h2 className="text-4xl font-bold text-green-800 mt-3">
+              {stats.totalAdvisories}
+            </h2>
+            <p className="text-sm text-gray-500 mt-2">
+              All time recommendations
+            </p>
           </div>
 
           <div className="bg-white p-6 rounded-2xl shadow">
             <p className="text-gray-500">This Month</p>
-            <h2 className="text-4xl font-bold text-green-800 mt-3">{stats.totalAdvisories}</h2>
+            <h2 className="text-4xl font-bold text-green-800 mt-3">
+              {stats.totalAdvisories}
+            </h2>
             <p className="text-sm text-gray-500 mt-2">Recommendations</p>
           </div>
 
@@ -58,12 +67,16 @@ function Dashboard() {
             <h2 className="text-4xl font-bold text-green-800 mt-3">
               ₹{stats.latest?.estimatedProfit || 0}
             </h2>
-            <p className="text-sm text-gray-500 mt-2">Latest estimated profit</p>
+            <p className="text-sm text-gray-500 mt-2">
+              Latest estimated profit
+            </p>
           </div>
         </div>
 
         <div className="bg-white rounded-2xl shadow mt-8 p-6">
-          <h2 className="text-2xl font-bold text-green-800 mb-5">Latest Recommendation</h2>
+          <h2 className="text-2xl font-bold text-green-800 mb-5">
+            Latest Recommendation
+          </h2>
 
           {stats.latest ? (
             <table className="w-full text-left">
@@ -79,12 +92,16 @@ function Dashboard() {
               </thead>
               <tbody>
                 <tr className="border-b">
-                  <td className="p-3 font-bold">{stats.latest.recommendedCrop}</td>
+                  <td className="p-3 font-bold">
+                    {stats.latest.recommendedCrop}
+                  </td>
                   <td className="p-3">{stats.latest.soilType}</td>
                   <td className="p-3">{stats.latest.season}</td>
                   <td className="p-3">{stats.latest.waterAvailability}</td>
                   <td className="p-3">₹{stats.latest.estimatedProfit}</td>
-                  <td className="p-3">{new Date(stats.latest.createdAt).toLocaleString()}</td>
+                  <td className="p-3">
+                    {new Date(stats.latest.createdAt).toLocaleString()}
+                  </td>
                 </tr>
               </tbody>
             </table>
