@@ -16,7 +16,7 @@ function Login() {
 
     try {
       setLoading(true);
-      const res = await API.post("/auth/login", form);
+      const res = await API.post("/api/auth/login", form);
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
@@ -32,8 +32,12 @@ function Login() {
   return (
     <div className="min-h-screen bg-green-50">
       <nav className="bg-[#064b2a] text-white px-8 py-4 flex justify-between">
-        <Link to="/" className="text-2xl font-bold">AgriGuide 🌱</Link>
-        <Link to="/" className="font-semibold">Home</Link>
+        <Link to="/" className="text-2xl font-bold">
+          AgriGuide 🌱
+        </Link>
+        <Link to="/" className="font-semibold">
+          Home
+        </Link>
       </nav>
 
       <div className="min-h-[calc(100vh-72px)] flex items-center justify-center px-4 bg-linear-to-br from-green-50 to-green-100">

@@ -21,7 +21,7 @@ function Signup() {
 
     try {
       setLoading(true);
-      await API.post("/auth/signup", form);
+      await API.post("/api/auth/signup");
       alert("Signup successful. Now login.");
       navigate("/login");
     } catch (error) {
