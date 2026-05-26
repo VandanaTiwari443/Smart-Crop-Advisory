@@ -21,7 +21,9 @@ function Signup() {
 
     try {
       setLoading(true);
-      await API.post("/api/auth/signup");
+
+      await API.post("/api/auth/signup", form);
+
       alert("Signup successful. Now login.");
       navigate("/login");
     } catch (error) {
@@ -34,8 +36,12 @@ function Signup() {
   return (
     <div className="min-h-screen bg-green-50">
       <nav className="bg-[#064b2a] text-white px-8 py-4 flex justify-between">
-        <Link to="/" className="text-2xl font-bold">AgriGuide 🌱</Link>
-        <Link to="/login" className="font-semibold">Login</Link>
+        <Link to="/" className="text-2xl font-bold">
+          AgriGuide 🌱
+        </Link>
+        <Link to="/login" className="font-semibold">
+          Login
+        </Link>
       </nav>
 
       <div className="min-h-[calc(100vh-72px)] flex items-center justify-center px-4 bg-linear-to-br from-green-50 to-green-100">
@@ -48,12 +54,45 @@ function Signup() {
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            <input name="name" placeholder="Enter your name" value={form.name} onChange={handleChange} className="w-full border px-4 py-3 rounded-xl" required />
-            <input type="email" name="email" placeholder="Enter your email" value={form.email} onChange={handleChange} className="w-full border px-4 py-3 rounded-xl" required />
-            <input type="password" name="password" placeholder="Create password" value={form.password} onChange={handleChange} className="w-full border px-4 py-3 rounded-xl" required />
-            <input name="location" placeholder="Enter location" value={form.location} onChange={handleChange} className="w-full border px-4 py-3 rounded-xl" required />
+            <input
+              name="name"
+              placeholder="Enter your name"
+              value={form.name}
+              onChange={handleChange}
+              className="w-full border px-4 py-3 rounded-xl"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              value={form.email}
+              onChange={handleChange}
+              className="w-full border px-4 py-3 rounded-xl"
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Create password"
+              value={form.password}
+              onChange={handleChange}
+              className="w-full border px-4 py-3 rounded-xl"
+              required
+            />
+            <input
+              name="location"
+              placeholder="Enter location"
+              value={form.location}
+              onChange={handleChange}
+              className="w-full border px-4 py-3 rounded-xl"
+              required
+            />
 
-            <button disabled={loading} className="w-full bg-green-700 text-white py-3 rounded-xl font-bold">
+            <button
+              disabled={loading}
+              className="w-full bg-green-700 text-white py-3 rounded-xl font-bold"
+            >
               {loading ? "Registering..." : "Register"}
             </button>
           </form>
