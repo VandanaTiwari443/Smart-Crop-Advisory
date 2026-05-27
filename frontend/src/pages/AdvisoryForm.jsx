@@ -14,20 +14,29 @@ function AdvisoryForm() {
   });
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       setLoading(true);
+
       const res = await API.post("/api/advisory", {
+        ...form,
         landArea: Number(form.landArea),
         budget: Number(form.budget),
       });
 
       localStorage.setItem("lastResult", JSON.stringify(res.data));
+
       navigate("/result");
     } catch (error) {
       alert(error.response?.data?.message || "Failed to generate advisory");
@@ -35,7 +44,6 @@ function AdvisoryForm() {
       setLoading(false);
     }
   };
-
   return (
     <div className="min-h-screen bg-[#eaf6ee]">
       <Navbar />
