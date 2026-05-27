@@ -5,23 +5,28 @@ import API from "../services/api";
 function History() {
   const [history, setHistory] = useState([]);
   const [selected, setSelected] = useState(null);
+  const fetchHistory = async () => {
+    const res = await API.get("/api/advisory/my");
+    setHistory(res.data);
+  };
   useEffect(() => {
     const fetchHistory = async () => {
-      const res = await API.get("/advisory/my");
+      const res = await API.get("/api/advisory/my");
       setHistory(res.data);
     };
 
     fetchHistory();
   }, []);
   const handleDelete = async (id) => {
-    const confirmDelete = confirm("Are you sure you want to delete this advisory?");
+    const confirmDelete = confirm(
+      "Are you sure you want to delete this advisory?",
+    );
 
     if (!confirmDelete) return;
 
     try {
-      await API.delete(`/advisory/${id}`);
+      await API.delete(`/api/advisory/${id}`);
       alert("Deleted successfully ✅");
-      // eslint-disable-next-line no-undef
       fetchHistory();
     } catch (error) {
       alert(error.response?.data?.message || "Delete failed");
@@ -96,15 +101,33 @@ function History() {
                 </h2>
 
                 <div className="space-y-3">
-                  <p><b>Soil:</b> {selected.soilType}</p>
-                  <p><b>Season:</b> {selected.season}</p>
-                  <p><b>Water:</b> {selected.waterAvailability}</p>
-                  <p><b>Land Area:</b> {selected.landArea} acres</p>
-                  <p><b>Budget:</b> ₹{selected.budget}</p>
-                  <p><b>Fertilizer:</b> {selected.fertilizer}</p>
-                  <p><b>Water Need:</b> {selected.waterNeed}</p>
-                  <p><b>Estimated Profit:</b> ₹{selected.estimatedProfit}</p>
-                  <p><b>Reason:</b> {selected.reason}</p>
+                  <p>
+                    <b>Soil:</b> {selected.soilType}
+                  </p>
+                  <p>
+                    <b>Season:</b> {selected.season}
+                  </p>
+                  <p>
+                    <b>Water:</b> {selected.waterAvailability}
+                  </p>
+                  <p>
+                    <b>Land Area:</b> {selected.landArea} acres
+                  </p>
+                  <p>
+                    <b>Budget:</b> ₹{selected.budget}
+                  </p>
+                  <p>
+                    <b>Fertilizer:</b> {selected.fertilizer}
+                  </p>
+                  <p>
+                    <b>Water Need:</b> {selected.waterNeed}
+                  </p>
+                  <p>
+                    <b>Estimated Profit:</b> ₹{selected.estimatedProfit}
+                  </p>
+                  <p>
+                    <b>Reason:</b> {selected.reason}
+                  </p>
                 </div>
 
                 <button

@@ -12,14 +12,21 @@ import {
 } from "chart.js";
 import { Pie, Bar } from "react-chartjs-2";
 
-ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+);
 
 function Analytics() {
   const [analytics, setAnalytics] = useState({ cropCount: {}, soilCount: {} });
 
   useEffect(() => {
     const fetchAnalytics = async () => {
-      const res = await API.get("/advisory/analytics");
+      const res = await API.get("/api/advisory/analytics");
       setAnalytics(res.data);
     };
 
@@ -37,7 +44,13 @@ function Analytics() {
       {
         label: "Crops Recommended",
         data: cropValues,
-        backgroundColor: ["#16a34a", "#f59e0b", "#22c55e", "#0ea5e9", "#a855f7"],
+        backgroundColor: [
+          "#16a34a",
+          "#f59e0b",
+          "#22c55e",
+          "#0ea5e9",
+          "#a855f7",
+        ],
         borderRadius: 10,
       },
     ],
@@ -63,32 +76,54 @@ function Analytics() {
 
       <div className="max-w-7xl mx-auto px-6 py-10">
         <div className="bg-white rounded-3xl shadow-lg p-8">
-          <h1 className="text-4xl font-bold text-green-800 mb-2">Analytics 📊</h1>
-          <p className="text-gray-600 mb-8">Insights from your crop recommendations.</p>
+          <h1 className="text-4xl font-bold text-green-800 mb-2">
+            Analytics 📊
+          </h1>
+          <p className="text-gray-600 mb-8">
+            Insights from your crop recommendations.
+          </p>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="border rounded-2xl p-6">
-              <h2 className="text-xl font-bold text-green-800 mb-4">Crops Recommended</h2>
-              {cropLabels.length ? <Bar data={cropBarData} /> : <p>No crop analytics available.</p>}
+              <h2 className="text-xl font-bold text-green-800 mb-4">
+                Crops Recommended
+              </h2>
+              {cropLabels.length ? (
+                <Bar data={cropBarData} />
+              ) : (
+                <p>No crop analytics available.</p>
+              )}
             </div>
 
             <div className="border rounded-2xl p-6">
-              <h2 className="text-xl font-bold text-green-800 mb-4">Soil Type Analysis</h2>
-              {soilLabels.length ? <Pie data={soilPieData} /> : <p>No soil analytics available.</p>}
+              <h2 className="text-xl font-bold text-green-800 mb-4">
+                Soil Type Analysis
+              </h2>
+              {soilLabels.length ? (
+                <Pie data={soilPieData} />
+              ) : (
+                <p>No soil analytics available.</p>
+              )}
             </div>
           </div>
 
           <div className="grid md:grid-cols-4 gap-6 mt-8">
             <div className="bg-green-50 rounded-2xl p-6 text-center">
-              <h3 className="text-4xl font-bold text-green-800">{cropLabels.length}</h3>
+              <h3 className="text-4xl font-bold text-green-800">
+                {cropLabels.length}
+              </h3>
               <p>Total Crops</p>
             </div>
             <div className="bg-green-50 rounded-2xl p-6 text-center">
-              <h3 className="text-4xl font-bold text-green-800">{soilLabels.length}</h3>
+              <h3 className="text-4xl font-bold text-green-800">
+                {soilLabels.length}
+              </h3>
               <p>Soil Types</p>
             </div>
             <div className="bg-green-50 rounded-2xl p-6 text-center">
-              <h3 className="text-4xl font-bold text-green-800">{totalRecommendations}</h3>
+              <h3 className="text-4xl font-bold text-green-800">
+                {totalRecommendations}
+              </h3>
               <p>Recommendations</p>
             </div>
             <div className="bg-green-50 rounded-2xl p-6 text-center">
